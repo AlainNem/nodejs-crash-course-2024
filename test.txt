@@ -1,0 +1,2 @@
+test write file
+appended to file ok
