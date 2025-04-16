@@ -16,16 +16,14 @@ const server = createServer(async (req, res) => {
  } else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET') {
     const id  = req.url.split('/')[3];
     const user = users.find((user) => user.id === parseInt(id));
+    res.setHeader('Content-type', 'application/json');
     if(user){
-        res.setHeader('Content-type', 'application/json');
         res.write(JSON.stringify(user));
-        res.end();
     } else {
-        res.setHeader('Content-type', 'application/json');
         res.statusCode = 404;
         res.write(JSON.stringify({ message :'User not found' }));
-        res.end();
     }
+    res.end();
  } else {
     res.setHeader('Content-type', 'application/json');
     res.statusCode = 404;
